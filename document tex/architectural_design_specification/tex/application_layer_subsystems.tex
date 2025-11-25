@@ -1,0 +1,76 @@
+\subsection{Task Management}
+The Task Management Subsystem is responsible for interpreting user commands, scheduling tasks, and ensuring that execution follows defined priorities and dependencies. It also monitors execution outcomes, reports status to the user, and logs errors to maintain traceability and reliability.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%   Change the graphic here. Put your image in the 'images' folder
+%   and update the name from 'images/test_image' to your image name
+\begin{figure}[h!]
+	\centering
+ 	\includegraphics[width=0.60\textwidth]{images/application_layer.png}
+ \caption{Application Layer diagram} % Be sure to change the caption
+\end{figure}
+
+\subsubsection{Assumptions}
+Task management is assumed to give output to the user CLI interface by having tasks be controlled through the Robot Operating System (ROS) polyscope.
+
+\subsubsection{Responsibilities}
+Task management is responsible for essentially handling all tasks wished to be programmed and executed for the UR20 arm and vacuum system.
+
+\subsubsection{Subsystem Interfaces}
+
+\begin {table}[H]
+\caption {Task management} 
+\begin{center}
+    \begin{tabular}{ | p{1cm} | p{6cm} | p{3cm} | p{3cm} |}
+    \hline
+    ID & Description & Inputs & Outputs \\ \hline
+    \#1 & user commands, execution schedules, execution status & \pbox{3cm}{N/A} & \pbox{3cm}{output 1}  \\ \hline
+    \end{tabular}
+\end{center}
+\end{table}
+
+\subsection{Error Logging}
+The Error Logging Subsystem captures and records runtime errors, exceptions, and abnormal events with time-stamped entries for traceability. It provides structured logs that support debugging, maintenance, and reliability by making error details accessible to users and administrators.
+
+\subsubsection{Assumptions}
+The UR20 arm is connected to a sensor that detects any objects potentially in the way. The sensor can send errors and warnings back to the user interface, polyscope. Many emergency stops are incorporated such as the red button at the top of the polyscope x device (tablet-like controller) and arm stop when colliding with itself.
+
+\subsubsection{Responsibilities}
+Emergency stops are crucial as they are the main barrier for disaster. Having these fail-safes incorporated are responsible for the safety of others.
+
+\subsubsection{Subsystem interfaces}
+
+\begin {table}[H]
+\caption {Error Logging} 
+\begin{center}
+    \begin{tabular}{ | p{1cm} | p{6cm} | p{3cm} | p{3cm} |}
+    \hline
+    ID & Description & Inputs & Outputs \\ \hline
+    \#2 & runtime errors, exceptions, unexpected events, and emergencies & \pbox{3cm}{N/A} & \pbox{3cm}{output 2}  \\ \hline
+    \end{tabular}
+\end{center}
+\end{table}
+
+\subsection{User CLI Interface}
+The User CLI Interface Subsystem provides a text-based environment where users can issue commands to initiate tasks, monitor system state, and control operations. It parses inputs, validates syntax, and displays results or feedback in a clear and consistent format over polyscope, the main user interface for UR20.
+
+\subsubsection{Assumptions}
+The user interface is assumed to be functional with the UR20 arm and have the user use previous task managing and error logging to their control. This subsystem gives the user direct control over the UR20 arm.
+
+\subsubsection{Responsibilities}
+This subsystem is responsible for allowing the user to have a method of control over the UR20 arm by having polyscope be functional for the robot.
+
+\subsubsection{Subsystem Interfaces}
+
+\begin {table}[H]
+\caption {User CLI Interface} 
+\begin{center}
+    \begin{tabular}{ | p{1cm} | p{6cm} | p{3cm} | p{3cm} |}
+    \hline
+    ID & Description & Inputs & Outputs \\ \hline
+    \#1 & Takes in task handling with given executions and functions & \pbox{3cm}{input 1} & \pbox{3cm}{N/A}  \\ \hline
+    \#2 & Takes in error loggings for faults or emergency actions & \pbox{3cm}{input 2} & \pbox{3cm}{N/A}  \\ \hline
+    \#3 & Outputs controls and actions to the ROS & \pbox{3cm}{N/A} & \pbox{3cm}{output 3}  \\ \hline
+    \end{tabular}
+\end{center}
+\end{table}

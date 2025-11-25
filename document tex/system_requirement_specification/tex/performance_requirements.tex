@@ -1,0 +1,40 @@
+Performance requirements for \textbf{The Vacu-arm} address operational speed, responsiveness, energy efficiency, and overall usability in time-constrained environments such as classrooms or labs. These requirements help ensure the system performs reliably under expected workloads and can be set up or operated efficiently. They also define expectations for motor responsiveness, system startup time, and power constraints, all of which are critical for maintaining user satisfaction and minimizing downtime.
+
+\subsection{Movement Response Time}
+\subsubsection{Description}
+\textbf{The Vacu-arm} must respond to movement commands within 200 milliseconds of input, ensuring low-latency control and smooth operation during manual or automated tasks.
+\subsubsection{Source}
+User feedback and real-time control expectations
+\subsubsection{Constraints}
+Performance may vary depending on USB communication speed; all operations must remain under 250ms even under load.
+\subsubsection{Standards}
+ISO 9283 (Manipulating Industrial Robots - Performance Criteria) \\
+ROS real-time communication guidelines (if used)
+\subsubsection{Priority}
+High
+
+\subsection{Startup Time}
+\subsubsection{Description}
+The system must complete initialization and become operational within 10 seconds of being powered on or connected to a host computer.
+\subsubsection{Source}
+Usability best practices; team-defined usability targets
+\subsubsection{Constraints}
+Includes firmware boot-up, serial connection initialization, and readiness check.
+\subsubsection{Standards}
+IEEE 1471 (Software Architecture) \\
+ISO/IEC 25010 (System Usability Characteristics)
+\subsubsection{Priority}
+Medium
+
+\subsection{Setup Time}
+\subsubsection{Description}
+Initial setup (physical connection and software recognition) must take no longer than 5 minutes, assuming no prior technical knowledge from the user.
+\subsubsection{Source}
+Educational use case goals; instructor feedback
+\subsubsection{Constraints}
+Includes unpacking, connecting hardware, launching software, and verifying connection.
+\subsubsection{Standards}
+ISO 9241-110 (Interaction principles for usability) \\
+IEEE 1063 (User documentation)
+\subsubsection{Priority}
+High

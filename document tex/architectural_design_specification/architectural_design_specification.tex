@@ -1,0 +1,142 @@
+%%% LaTeX Template: Article/Thesis/etc. with colored headings and special fonts
+%%%
+%%% Source: http://www.howtotex.com/
+%%% Feel free to distribute this template, but please keep to referal to http://www.howtotex.com/ here.
+%%% February 2011
+%%%
+%%% Modified January 2016 by CDM
+%%% Modified/simplified by CTC 2018 - 2023
+
+%%%  Preamble
+\documentclass[11pt,letterpaper]{article}
+\usepackage[margin=1.0in]{geometry}
+\usepackage[T1]{fontenc}
+\usepackage[bitstream-charter]{mathdesign}
+\usepackage[latin1]{inputenc}					
+\usepackage{amsmath}						
+\usepackage{xcolor}
+\usepackage{cite}
+\usepackage{hyphenat}
+\usepackage{graphicx}
+\usepackage{float}
+\usepackage{subfigure}
+\usepackage{sectsty}
+\usepackage[compact]{titlesec} 
+\usepackage[tablegrid]{vhistory}
+\usepackage{pbox}
+\allsectionsfont{\color{accentcolor}\scshape\selectfont}
+
+%%% Definitions
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Change me to fit your team/semester information
+\definecolor{accentcolor}{rgb}{0.0,0.0,0.5} 
+\newcommand{\teamname}{The Suctioneers}
+\newcommand{\productname}{The Vacu-Arm}
+\newcommand{\coursename}{CSE 4317: Senior Design II}
+\newcommand{\semester}{Fall 2025}
+\newcommand{\docname}{Architectural Design Specification}
+\newcommand{\department}{Department of Computer Science \& Engineering}
+\newcommand{\university}{The University of Texas at Arlington}
+\newcommand{\authors}{Andrew Weiler \\ Andrew Whitmill \\ Samriddha Kharel \\ Seezayn Bishwokarma \\ Jonathan Camarce}
+
+%%% Headers and footers
+\usepackage{fancyhdr}
+	\pagestyle{fancy}						% Enabling the custom headers/footers
+\usepackage{lastpage}	
+	% Header (empty)
+	\lhead{}
+	\chead{}
+	\rhead{}
+	% Footer
+	\lfoot{\footnotesize \teamname \ - \semester}
+	\cfoot{}
+	\rfoot{\footnotesize page \thepage\ of \pageref{LastPage}}	% "Page 1 of 2"
+	\renewcommand{\headrulewidth}{0.0pt}
+	\renewcommand{\footrulewidth}{0.4pt}
+
+%%% Change the abstract environment
+\usepackage[runin]{abstract}			% runin option for a run-in title
+%\setlength\absleftindent{30pt}			% left margin
+%\setlength\absrightindent{30pt}		% right margin
+\abslabeldelim{\quad}	
+\setlength{\abstitleskip}{-10pt}
+\renewcommand{\abstractname}{}
+\renewcommand{\abstracttextfont}{\color{accentcolor} \small \slshape}	% slanted text
+
+%%% Start of the document
+\begin{document}
+
+%%% Cover sheet
+{\centering \huge \color{accentcolor} \sc \textbf{\department \\ \university} \par} % department/university info
+\vspace{1 in}
+{\centering \huge \color{accentcolor} \sc \textbf{\docname \\ \coursename \\ \semester} \par} % doc/semester info
+\vspace{0.45 in} % spacing before cover sheet image
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%   Change the graphic here. Put your image in the 'images' folder
+%   and update the name from 'images/test_image' to your image name
+\begin{figure}[h!]
+	\centering
+   	\includegraphics[width=0.60\textwidth]{images/logosucc.png}
+\end{figure}
+\vspace{0.4 in} % spacing after cover sheet image, before team/product info
+{\centering \huge \color{accentcolor} \sc \textbf{\teamname \\ \productname} \par}
+\vspace{0.4 in} % spacing before team members
+{\centering \large \sc \textbf{\authors} \par}
+\newpage
+
+
+%\vspace{1 in}
+%\centerline{January 13th, 2012}
+%\newpage
+
+%%% Revision History
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Each '\vhEntry' begins a new version entry, and each {} is a 
+% column. Update this to reflect your version history.
+\begin{versionhistory}
+  	\vhEntry{0.1}{8.22.2025}{CC}{document creation}
+  	\vhEntry{0.2}{9.19.2025}{AW|AW|SK|JC}{complete draft}
+  	\vhEntry{0.3}{X.X.2025}{}{release candidate 1}
+  	\vhEntry{1.0}{X.X.2025}{}{official release}
+  	\vhEntry{1.1}{X.X.20X5}{}{added design review requests}
+\end{versionhistory}
+\newpage
+
+%%% Table of contents
+\setcounter{tocdepth}{2}
+\tableofcontents
+\newpage
+
+%%% List of figures and tables (optional)
+\listoffigures
+\listoftables
+\newpage
+
+%%% Document sections
+% The \section command creates a section, assigns it a number and gives it the title in the braces.
+% The \input command inserts the contents of the text file indicated in the braces.
+\section{Introduction}
+\input{tex/introduction.tex}
+\newpage
+\section{System Overview}
+\input{tex/system_overview.tex}
+\newpage
+\section{Subsystem Definitions \& Data Flow}
+\input{tex/data_flow.tex}
+\newpage
+\section{Application Layer Subsystems}
+\input{tex/application_layer_subsystems.tex}
+\newpage
+\section{Control Layer Subsystems}
+\input{tex/control_layer_subsystems}
+\newpage
+\section{Hardware Layer Subsystems}
+\input{tex/hardware_layer_subsystems}
+\newpage
+
+%%% References
+%\bibliographystyle{plain}
+\bibliographystyle{reference/IEEEtran_custom}
+\bibliography{reference/refs}{}
+
+\end{document}

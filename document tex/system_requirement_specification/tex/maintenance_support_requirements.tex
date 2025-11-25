@@ -1,0 +1,53 @@
+\textbf{The Vacu-arm} will require ongoing maintenance and support to ensure its continued operation in classroom, research, and prototyping environments. Maintenance and support responsibilities include error correction, hardware replacement, troubleshooting support, and access to necessary documentation and source code. These requirements are defined with the assumption that either internal technical staff or external customers may need to support \textbf{The Vacu-arm} "in the field." To that end, documentation, tooling, and source code accessibility are critical to sustaining system performance after initial deployment.
+
+\subsection{Access to Source Code and Documentation}
+\subsubsection{Description}
+Full source code and technical documentation for \textbf{The Vacu-arm}, including build instructions, interface specifications, and system architecture, must be provided. This ensures maintainers can debug, rebuild, or enhance the system when necessary.
+\subsubsection{Source}
+Open-source practices, internal maintenance team requirements
+\subsubsection{Constraints}
+All documentation must be in human-readable format (e.g., Markdown, PDF) and stored in a version-controlled repository (e.g., GitHub or GitLab).
+\subsubsection{Standards}
+IEEE 828 (Configuration Management) \\
+ISO/IEC 26514 (Documentation for software users)
+\subsubsection{Priority}
+High
+
+\subsection{Troubleshooting and Maintenance Guides}
+\subsubsection{Description}
+Detailed maintenance and troubleshooting manuals must be developed for both hardware and software subsystems of \textbf{The Vacu-arm}. These guides should include diagnostics steps, error codes, and common failure resolutions.
+\subsubsection{Source}
+User experience expectations; internal QA policy
+\subsubsection{Constraints}
+Documentation must be understandable by users with limited robotics experience; visuals or diagrams should accompany textual instructions.
+\subsubsection{Standards}
+ISO/IEC 26513 (System and software engineering -- Requirements for testers) \\
+ISO 9241-110 (User interfaces)
+\subsubsection{Priority}
+High
+
+\subsection{Tooling Requirements for Maintenance}
+\subsubsection{Description}
+All specialized tools (hardware or software) required to maintain \textbf{The Vacu-arm} must be documented and, where possible, distributed with the product or made easily accessible. These include specific calibration tools, drivers, or interface software.
+\subsubsection{Source}
+Hardware team input; sprint testing observations
+\subsubsection{Constraints}
+Avoid reliance on proprietary tools unless necessary; prioritize open-source or low-cost maintenance solutions.
+\subsubsection{Standards}
+ISO/IEC 19770 (Software Asset Management) \\
+General ESD (Electrostatic Discharge) handling best practices
+\subsubsection{Priority}
+Medium
+
+\subsection{Support Environment Specifications}
+\subsubsection{Description}
+A clear specification of the software environment required to run diagnostics and maintenance tasks on \textbf{The Vacu-arm} must be provided. This includes supported OS platforms, Python versions, and necessary libraries.
+\subsubsection{Source}
+Software team input; platform compatibility goals
+\subsubsection{Constraints}
+Environment must be cross-platform (Windows, Linux, macOS) and easily reproducible with documented setup steps or environment files (e.g., \texttt{requirements.txt}).
+\subsubsection{Standards}
+PEP 508 (Python dependency specification) \\
+Docker or virtual environment usage standards (if applicable)
+\subsubsection{Priority}
+Moderate

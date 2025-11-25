@@ -1,0 +1,69 @@
+\subsection{Layer Hardware}
+The vacuum gripper layer is responsible for generating and controlling suction used to lift and manipulate objects. The hardware for this layer includes a compact vacuum pump, a pressure regulation system, solenoid valves for suction control, a microcontroller-based control unit, and a network of sensors for feedback.
+
+The primary vacuum source is an electric rotary vane vacuum pump capable of achieving pressures down to -85~kPa, providing sufficient suction for lifting packages and palletized goods. The pump output is connected to a vacuum reservoir that stabilizes pressure and prevents fluctuations during rapid pick-and-place operations.
+
+A glass vacuum chamber with an integrated pressure gauge and safety release valve is used for monitoring and calibration. Solenoid valves (12~V DC, normally closed) are employed to control air flow between the pump, the reservoir, and individual suction cups. Each suction cup is made of flexible silicone rubber and mounted on adjustable joints to conform to uneven surfaces.
+
+The control system is built around an Arduino, while a dedicated motor drives the pump power relay, while pressure sensors (0 to 100 kPa range) provide analog feedback to the controller for real-time pressure monitoring.
+
+\subsection{Layer Operating System}
+The hardware layer runs on embedded firmware and does not require a traditional operating system. The Arduino microcontroller executes a bare-metal program loop that handles input/output, sensor reading, and valve actuation in real time. If integrated into a larger robotic platform, communication with higher-level software occurs over a serial or interface, managed by the main system’s operating environment. 
+
+\subsection{Layer Software Dependencies}
+At the hardware layer, no external operating system libraries are required. However, the firmware depends on the Arduino core libraries for GPIO control, analog sensor reading, and serial communication. Additional libraries include:
+\begin{itemize}
+  \item \texttt{Adafruit\_Sensor.h} for managing analog pressure sensor inputs.
+  \item \texttt{Servo.h} for optional valve actuation mechanisms.
+  \item \texttt{Wire.h} for I\textsuperscript{2}C data exchange with supervisory controllers.
+\end{itemize}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{Subsystem 1: Vacuum Generation and Control}
+The Vacuum Generation and Control subsystem is responsible for producing and maintaining the suction required to grip objects, as well as dynamically adjusting vacuum strength based on feedback. This subsystem handles pump activation, air routing, and pressure monitoring.
+
+\begin{figure}[h!]
+	\centering
+ 	\includegraphics[width=0.30\textwidth]{images/vacuum_gripper.png}
+ 	\caption{Vacuum Gripper System Architecture}
+\end{figure}
+
+\subsubsection{Subsystem Hardware}
+The subsystem includes:
+\begin{itemize}
+  \item Electric rotary vane vacuum pump (12~V DC, 45~W)
+  \item 250~mL vacuum reservoir with check valve
+  \item Dual solenoid valve manifold for suction control
+  \item Pressure transducer
+  \item Microcontroller interface board
+\end{itemize}
+
+\subsubsection{Subsystem Operating System}
+This subsystem operates using microcontroller firmware written for the Arduino platform, without a formal OS. Control routines run in a continuous loop, ensuring low-latency response to sensor readings and valve commands.
+
+\subsubsection{Subsystem Software Dependencies}
+Key dependencies include:
+\begin{itemize}
+  \item Arduino core libraries (\texttt{digitalWrite()}, \texttt{analogRead()}, etc.)
+  \item Custom \texttt{VacuumController} library developed in-house for managing pump states and thresholds
+  \item Optional serial communication protocol for integration with higher-level robotic software (e.g., ROS)
+\end{itemize}
+
+\subsubsection{Subsystem Programming Languages}
+The subsystem is programmed primarily in C/C++ using the Arduino IDE. Communication protocols and higher-level data visualization tools may be implemented in Python when interfacing with supervisory systems.
+
+\subsubsection{Subsystem Data Structures}
+Data transmitted between components includes structured sensor packets and control commands. A typical data packet follows this structure:
+\begin{verbatim}
+struct VacuumData {
+  float pressure_kPa;
+  bool valveState;
+  bool pumpActive;
+  unsigned long timestamp;
+};
+\end{verbatim}
+These packets are sent periodically to the main controller for monitoring and logging.
+
+\subsubsection{Subsystem Data Processing}
+Pressure readings are sampled at 50~Hz and filtered using a moving average to reduce sensor noise. The system employs a proportional control algorithm to maintain target vacuum pressure by adjusting pump duty cycle and valve timing. Safety thresholds trigger automatic valve release if the vacuum exceeds safe limits or if the object is dropped unexpectedly.
+

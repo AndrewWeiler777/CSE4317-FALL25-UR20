@@ -1,0 +1,31 @@
+This product is intended to support general-purpose industrial automation using the Universal Robots UR20 collaborative robotic arm. While no specific customer or sponsor has been identified at this stage, the intended audience includes manufacturing engineers, automation specialists, and factory floor managers seeking to integrate robotic systems into their workflows. The UR20 arm will be configured to perform a variety of tasks such as object manipulation, machine tending, and precision assembly, with an emphasis on flexibility, safety, and ease of integration. The customer requirements outlined in this section define the essential features, behaviors, and performance expectations from an end-user perspective. These include intuitive user interfaces, reliable performance under factory conditions, compatibility with standard industrial protocols, and built-in safety features to support collaborative use. These requirements reflect common industry needs and will serve as the foundation for design and validation throughout the development lifecycle.
+
+\subsection{Requirement Name}
+\subsubsection{Description}
+The UR20 robotic arm will be operable through a user-facing interface that supports both voice commands and real-time hand gesture
+control. This dual-mode input system will enhance accessibility and flexibility on the factory floor, allowing operators to interact with the robot without physical contact or traditional input devices.
+
+Voice control will be facilitated through a built-in microphone array and speech recognition engine (e.g., Vosk or Whisper), configured to recognize a standardized set of industrial task commands (e.g., ''Pick up part A,'' ''Rotate 90 degrees,'' ''Stop motion''). The system will use natural language processing to interpret the intent of the command and provide audible feedback through a speaker or screen interface.
+
+\subsubsection{Source}
+User feedback and real-time control expectations
+\subsubsection{Constraints}
+Fail-safes must be implemented to immediately halt arm motion in case of misinterpreted voice or gesture commands
+\subsubsection{Standards}
+ISO 10218-1 (robot manufacturers) \\
+ISO 10218-2 (system integrators and end-users)
+\subsubsection{Priority}
+Moderate
+
+\subsection{Requirement Name}
+\subsubsection{Description}
+Hand gesture control will be implemented using a depth-sensing camera (e.g., Intel RealSense or a stereo camera system), capable of tracking the operator's hand position and movement in three dimensions. Key gestures, such as open hand for ''release,'' closed fist for ''grip,'' or pointing for directional motion, will be interpreted by a real-time computer vision model using a trained neural network or rule-based tracking.
+\subsubsection{Source}
+Educational use case goals; instructor feedback
+\subsubsection{Constraints}
+Fail-safes must be implemented to immediately halt arm motion in case of misinterpreted voice or gesture commands
+\subsubsection{Standards}
+ISO 10218-2 (system integrators and end-users) \\
+ISO/TS 15066 (Collaborative Robot Safety)
+\subsubsection{Priority}
+Moderate

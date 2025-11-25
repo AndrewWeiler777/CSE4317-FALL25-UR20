@@ -1,0 +1,79 @@
+\subsection{ROS Node Orchestration}
+The ROS Node Orchestration Subsystem coordinates communication and execution among ROS nodes to manage the UR20 robotic arm. It ensures synchronized task execution, message passing, and resource allocation so the arm operates reliably and efficiently.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%   Change the graphic here. Put your image in the 'images' folder
+%   and update the name from 'images/test_image' to your image name
+\begin{figure}[h!]
+	\centering
+ 	\includegraphics[width=0.60\textwidth]{images/control_layer.png}
+ \caption{Control layer diagram} % Be sure to change the caption.
+\end{figure}
+
+\subsubsection{Assumptions}
+The ROS nodes interact with the previous user CLI interface to take inputs from a user through a polyscope to handle robot programming. These programs control the motion of the arm and suction of the vacuum attached to the arm gripper.
+
+\subsubsection{Responsibilities}
+The ROS polyscope is the primary programmer for the UR20 arm. Its responsible for file and program handling, as well as lines of code being executed.
+
+\subsubsection{Subsystem Interfaces}
+
+\begin {table}[H]
+\caption {ROS Node Orchestration} 
+\begin{center}
+    \begin{tabular}{ | p{1cm} | p{6cm} | p{3cm} | p{3cm} |}
+    \hline
+    ID & Description & Inputs & Outputs \\ \hline
+    \#3 & Inputs controls from the User over the polyscope x device. & \pbox{3cm}{input 3} & \pbox{3cm}{N/A}  \\ \hline
+    \#4 & Outputs movement actions for the UR20 robotic arm with given code & \pbox{3cm}{N/A} & \pbox{3cm}{output 4}  \\ \hline
+    \#5 & Controls configurable outputs on the UR20 control box that lead to sunction controlling through a vacuum pump & \pbox{3cm}{N/A} & \pbox{3cm}{output 5}  \\ \hline
+    \end{tabular}
+\end{center}
+\end{table}
+
+\subsection{Motion Planning}
+
+\subsubsection{Assumptions}
+The Motion Planning subsystem is assumed to operate within a ROS-based control framework and is responsible for generating movement paths for the UR20 robotic arm. It is assumed that the robot model is correctly defined using URDF and that the necessary kinematics and collision parameters are available. The subsystem is expected to interface with the ROS Node Orchestration component for task sequencing and with the UR20 arm through standard ROS topics or services for executing planned paths. It is also assumed that the environment is either static or updated in real time through a perception system to support obstacle avoidance during path planning.
+
+\subsubsection{Responsibilities}
+The Motion Planning subsystem is responsible for generating safe and efficient movement paths for the UR20 robotic arm to complete assigned tasks. The subsystem must plan paths in both joint and task space, taking into account the robot's kinematics, workspace limits, and any obstacles.
+It is also responsible for monitoring the planned motions and providing feedback to the ROS Node Orchestration system. In the event of a failed plan or an interrupt, it must be able to replan or halt motion as necessary. This subsystem interfaces directly with the UR20 robot through ROS topics or services and supports integration with perception systems when available to update plans based on changes in the environment.
+
+
+\subsubsection{Subsystem Interfaces}
+The following table defines the inputs and outputs for the Motion Planning subsystem, covering its communication with other components such as the ROS Node Orchestration, UR20 robot arm, and environment perception systems.
+
+\begin {table}[H]
+\caption {Motion Planning} 
+\begin{center}
+    \begin{tabular}{ | p{1cm} | p{6cm} | p{3cm} | p{3cm} |}
+    \hline
+    ID & Description & Inputs & Outputs \\ \hline
+    \#01 & Interface to ROS Node Orchestration for path planning & \pbox{3cm}{input 4} & \pbox{3cm}{output 4}  \\ \hline
+    \#02 & Interface to UR20 Robot Arm updating joint position and state & \pbox{3cm}{N/A} & \pbox{3cm}{input 4}  \\ \hline
+    \end{tabular}
+\end{center}
+\end{table}
+
+\subsection{Suction Control}
+
+\subsubsection{Assumptions}
+The Suction Control subsystem is assumed to operate within a ROS-based environment. It receives commands to activate or deactivate the vacuum pump and provides feedback on suction status. The vacuum hardware is assumed to be compatible with simple digital control signals and capable of lifting objects up to 50 lbs. Integration with the robot arm's task sequence is handled through standard ROS communication interfaces.
+
+\subsubsection{Responsibilities}
+The Suction Control subsystem is responsible for managing the operation of the vacuum pump used by the robot's end-effector. It receives commands through ROS to activate or deactivate suction based on the task requirements. It also handles error conditions, such as failure to establish suction, by reporting the status to other ROS nodes.
+
+\subsubsection{Subsystem Interfaces}
+
+\begin {table}[H]\caption {Suction Control}
+\begin{center}
+    \begin{tabular}{ | p{1cm} | p{6cm} | p{3cm} | p{3cm} |}
+    \hline
+    ID & Description & Inputs & Outputs \\ \hline
+    \#01 & Interface to Suction Control ROS Node On or Off Commands & \pbox{3cm}{input 5 } & \pbox{3cm}{output 5}  \\ \hline
+    \#02 & Interface to Vacuum Pump Hardware & \pbox{3cm}{N/A} & \pbox{3cm}{output 5}  \\ \hline
+    \end{tabular}
+\end{center}
+\end{table}
+

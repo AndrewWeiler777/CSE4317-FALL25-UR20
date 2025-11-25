@@ -1,0 +1,47 @@
+The Vacu-Arm is a robotic arm that uses suction to pick up and move objects, making it ideal for repetitive tasks in workplaces like factories and warehouses. It helps reduce physical strain on workers, speeds up processes, and keeps performance consistent. The arm can run automatically or be manually controlled when needed, with a built-in camera to guide its movements. A second safety camera watches the area around it and stops the arm if it detects anything in the way, keeping people and equipment safe.
+
+\subsection{Features \& Functions}
+The Vacu-Arm is built using the UR20 robotic arm, which is known for being fast, accurate, and easy to work with. It uses a vacuum-powered gripper at the end of the arm to pick up, move, and place objects. The system connects to the arm over a network using an IP address, which lets it send and receive commands remotely. The Vacu-Arm can run tasks automatically or be controlled manually when needed, giving users flexibility for different situations.
+To handle visual input, the system uses a separate microcontroller. This microcontroller processes data from two camera systems. The first camera is mounted near the gripper and helps the Vacu-Arm see and accurately move objects. The second camera is part of a safety system that watches the area around the robot. If a person or object gets too close, the microcontroller immediately stops the arm from moving to prevent accidents.
+The Vacu-Arm setup includes the UR20 robot arm, the vacuum gripper, the two cameras, and the external microcontroller, all connected to each other. A control panel or screen is also included for the user to set up or adjust the system.
+
+\subsection{External Inputs \& Outputs}
+This subsection describes the key data exchanged between the Vacu-Arm system and external users or systems. The user can control the machine in two ways: by setting an automated task that specifies a pickup point and a destination point, or by manually controlling the arm using a camera system that provides visual feedback for precise movement and object handling. The table below summarizes the critical data elements involved in these processes, along with their descriptions and roles as inputs or outputs. Refer to Table 2
+
+\begin{table}[H]
+\centering
+\caption{Critical External Data Flows}
+\begin{tabular}{|l|p{7cm}|p{5cm}|}
+\hline
+\textbf{Data Name} & \textbf{Description} & \textbf{Use (Input/Output)} \\
+\hline
+User Command Input & Instructions from operator via control panel or interface, including task setup (pickup and destination points) or manual control commands via camera. & Input from end user \\
+\hline
+Task Configuration Data & Automated task parameters such as pickup location, destination location, and timing details. & Input from external system or user \\
+\hline
+Network Control Signal & Command messages sent over IP to control the UR20 robotic arm (e.g., move to position, activate gripper). & Output to robotic arm \\
+\hline
+Camera Feed (Primary) & Real-time video or images from the control camera mounted near the gripper, used to guide manual movement and object handling. & Input to microcontroller \\
+\hline
+Camera Feed (Safety) & Continuous video data from safety camera monitoring for obstacles or humans in the workspace. & Input to microcontroller \\
+\hline
+Safety Interrupt Signal & Signal from the microcontroller to immediately stop the robotic arm if an obstacle or person is detected nearby. & Output to robotic arm/controller \\
+\hline
+Status Feedback & System updates including task progress, error codes, and overall system status sent to the user interface. & Output to end user \\
+\hline
+Operation Logs & Records of movements, errors, and task completions for monitoring and maintenance. & Output to external system or user \\
+\hline
+\end{tabular}
+\label{tab:dataflows}
+\end{table}
+
+
+
+\subsection{Product Interfaces}
+The Vacu-Arm provides several operational interfaces tailored to different types of users, including end-users or operators, administrators, and maintainers. The primary interface for operators is a touchscreen control panel located near the base of the robotic arm. This panel displays a simple, intuitive graphical user interface that allows operators to initiate automated tasks by specifying pickup and destination points, or switch to manual control mode. In manual mode, the interface provides a live video feed from the primary camera mounted near the gripper, enabling operators to precisely guide the arm's movement and activate the vacuum gripper in real time.
+
+The control panel also presents status updates, such as current task progress, system health, and any active safety alerts. Operators receive immediate notifications if the safety camera system detects an obstacle or person, prompting the arm to halt. Buttons for starting, pausing, and stopping tasks are clearly displayed, along with emergency stop controls for quick intervention.
+
+Administrators access a more advanced interface, which may be hosted on a connected computer or tablet, to configure system parameters, manage user permissions, and update task routines. This interface includes dashboards that log operation history and error reports, assisting in system optimization and troubleshooting.
+
+Maintainers interact with the Vacu-Arm via service panels on the hardware itself, which allow physical access to components like the vacuum pump and wiring. They also use diagnostic tools accessible through the administrator interface to monitor system performance, run calibration routines, and perform software updates.

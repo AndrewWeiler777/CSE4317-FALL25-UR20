@@ -1,0 +1,55 @@
+\textbf{The Vacu-arm} is a programmable vacuum-based robotic arm system designed for precision material handling in research, educational, and prototyping environments. To ensure the system meets user expectations and performs reliably in a range of scenarios, this section outlines additional requirements not previously covered. These include configuration steps for customer setup, platform compatibility, software modularity, and architectural guidelines to support future enhancements. Meeting these requirements is essential for the successful deployment and long-term scalability of \textbf{The Vacu-arm}.
+
+\subsection{Modular Design}
+\subsubsection{Description}
+\textbf{The Vacu-arm} must follow a modular software and hardware design, allowing individual components (e.g., vacuum controller, movement controller, sensor feedback) to be updated, replaced, or extended independently without requiring major rework of the entire system.
+\subsubsection{Source}
+Engineering best practices, team decision during Sprint 2.
+\subsubsection{Constraints}
+All modules must follow a defined API/communication protocol to ensure compatibility. Any changes to one module must not break the functionality of others.
+\subsubsection{Standards}
+IEEE 1471 (Software Architecture) \\
+ISO/IEC 42010 \\
+ROS modularity guidelines
+\subsubsection{Priority}
+High
+
+\subsection{Extensibility for Future Enhancements}
+\subsubsection{Description}
+\textbf{The Vacu-arm} must be designed with extensibility in mind, allowing new features such as additional sensors, AI-based decision-making, or alternate gripper types to be integrated with minimal refactoring.
+\subsubsection{Source}
+Team foresight, advisor recommendation
+\subsubsection{Constraints}
+New features must integrate using the existing control and communication structure. Extensions must be backward-compatible.
+\subsubsection{Standards}
+SOLID principles (Software design) \\
+IEEE 830 (Software Requirements Specification)
+\subsubsection{Priority}
+Medium
+
+\subsection{Portability Across Platforms}
+\subsubsection{Description}
+The software controlling \textbf{The Vacu-arm} must be portable across major operating systems, including Windows, Linux, and macOS, without requiring platform-specific modifications.
+\subsubsection{Source}
+User requirement; educational use across diverse lab setups.
+\subsubsection{Constraints}
+Use only cross-platform libraries (e.g., Python standard library, PySerial for communication). Avoid OS-specific commands or tools.
+\subsubsection{Standards}
+POSIX compliance where applicable \\
+Python PEP 8 for cross-platform scripting \\
+USB/serial communication standards
+\subsubsection{Priority}
+Medium
+
+\subsection{Customer Setup and Configuration}
+\subsubsection{Description}
+The final product must include a simple configuration guide and scripts to enable users to set up \textbf{The Vacu-arm} with minimal technical background. The system should support plug-and-play recognition when connected to a host computer.
+\subsubsection{Source}
+Usability and accessibility goals; feedback from target users.
+\subsubsection{Constraints}
+Setup process must not require manual driver installation or low-level configuration changes. Must work with default Python installation and common USB interfaces.
+\subsubsection{Standards}
+ISO 9241-210 (Ergonomics of Human-System Interaction) \\
+USB HID standards (if applicable)
+\subsubsection{Priority}
+High

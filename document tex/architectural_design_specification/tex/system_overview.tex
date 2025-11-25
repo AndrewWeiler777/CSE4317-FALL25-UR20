@@ -1,0 +1,19 @@
+The Vacu-arm system is structured into three primary architectural layers: the Hardware Layer, the Control Layer, and the Application Layer. Each layer is designed with a unique purpose, encapsulating related functions to ensure modularity and maintainability. The interfaces between layers are clearly defined, allowing for seamless communication and minimizing cross-dependencies.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%   Change the graphic here. Put your image in the 'images' folder
+%   and update the name from 'images/test_image' to your image name
+\begin{figure}[h!]
+	\centering
+        \includegraphics[width=0.35\textwidth]{images/system_overview2.png}
+ \caption{Vacu-arm architectural layer diagram} % Be sure to change the caption!
+\end{figure}
+
+\subsection{Application Layer Description}
+The Application Layer provides the user-facing interface and operational framework. It offers a command-line interface (CLI) for users to initiate tasks, monitor system state, and control operations. It also manages task execution and error logging to ensure traceability and system reliability. By abstracting away low-level details, this layer enables users to operate the system intuitively and efficiently.
+
+\subsection{Control Layer Description}
+The Control Layer manages system intelligence and coordination. It is responsible for motion planning, ensuring that the robotic arm follows safe and efficient trajectories. It orchestrates ROS nodes to manage communication between software modules and integrates suction control commands with robotic arm movements. This layer acts as the intermediary, translating user tasks into executable hardware actions.
+
+\subsection{Hardware Layer Description}
+The Hardware Layer provides the physical foundation of the Vacu-arm system. It includes the UR20 robotic arm, which performs precise positioning and movement, and the vacuum suction assembly, which enables object gripping and manipulation. This layer serves as the execution endpoint for all high-level commands passed down from the Control Layer.

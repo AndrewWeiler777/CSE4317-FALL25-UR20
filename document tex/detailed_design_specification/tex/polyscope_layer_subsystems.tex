@@ -1,0 +1,73 @@
+\subsection{Layer Hardware}
+The PolyScript layer is primarily software-based and runs on an embedded computing platform responsible for coordinating high-level control of the vacuum gripper and related subsystems. It communicates with lower-level controllers (such as the Arduino handling suction control) through serial or Ethernet interfaces.
+
+The hardware hosting this layer consists of a Raspberry Pi 4 Model~B (4~GB RAM) running the control logic, connected to the microcontrollers via USB and to the operator terminal through a local network. The device includes Wi-Fi and Bluetooth modules for wireless data exchange and system monitoring.  
+
+An optional display module (7-inch touchscreen) is used for real-time status visualization and manual control input, though the system can also be operated headlessly through SSH or a network dashboard.
+
+\subsection{Layer Operating System}
+PolyScript operates on a Linux-based environment, specifically Raspberry Pi OS (64-bit). This OS provides the necessary networking and serial communication services as well as process management for PolyScript’s multitasking capabilities.  
+
+The OS allows the PolyScript service to run continuously on boot, monitor logs, and handle real-time control events while maintaining a network interface with other robotic layers. Cron jobs and systemd services are used for automated startup and fault recovery.
+
+\subsection{Layer Software Dependencies}
+PolyScript depends on a combination of standard and custom-built libraries to perform device communication, task scheduling, and sensor data processing. Core dependencies include:
+\begin{itemize}
+  \item Python 3.11 runtime environment
+  \item \texttt{pyserial} for serial communication with microcontrollers
+  \item \texttt{numpy} and \texttt{pandas} for data handling and filtering
+  \item \texttt{RPi.GPIO} for local GPIO-based signaling
+  \item \texttt{Flask} (optional) for hosting a web-based dashboard
+\end{itemize}
+Custom PolyScript modules are used to manage sequences, log data, and perform real-time error handling.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{Subsystem 1: PolyScript Core}
+The PolyScript Core subsystem provides the main logic and coordination functions for the vacuum gripper system. It translates operator commands and high-level instructions into precise, timed control signals for the hardware layer.  
+
+This subsystem is responsible for system initialization, connection handling, command scheduling, and interfacing with external automation frameworks. It also provides diagnostic feedback, such as current vacuum levels, operational states, and system errors.
+
+%  Be sure to update the image caption
+\begin{figure}[h!]
+	\centering
+ 	\includegraphics[width=0.50\textwidth]{images/polyscript.png} % Image
+ \caption{polyscope} % Caption
+\end{figure}
+
+\subsubsection{Subsystem Hardware}
+The subsystem runs on the main Raspberry Pi compute module or an equivalent embedded controller. It uses serial-over-USB and Ethernet ports to communicate with external controllers and sensors. No dedicated mechanical hardware is part of this subsystem; it acts as the digital interface layer.
+
+\subsubsection{Subsystem Operating System}
+The PolyScript Core subsystem inherits the Linux environment from the host platform. The process runs as a background service and uses multi-threading to handle communication with multiple devices simultaneously.  
+
+System logs and error reports are automatically stored under \texttt{/var/log/polyscript/} for debugging and data analysis.
+
+\subsubsection{Subsystem Software Dependencies}
+In addition to the global dependencies listed above, the PolyScript Core utilizes:
+\begin{itemize}
+  \item \texttt{asyncio} for concurrent task scheduling
+  \item \texttt{logging} for structured runtime event recording
+  \item Custom PolyScript I/O libraries for device abstraction and reusable command functions
+\end{itemize}
+
+\subsubsection{Subsystem Programming Languages}
+PolyScript Core is implemented in Python for its readability, cross-platform compatibility, and strong ecosystem of libraries. Some lower-level performance-critical modules (such as serial packet parsing) are implemented in C and integrated using Python’s \texttt{ctypes} interface.
+
+\subsubsection{Subsystem Data Structures}
+Communication between PolyScript and the microcontrollers uses structured JSON packets for command and status exchange. Each packet follows this format:
+\begin{verbatim}
+{
+  "timestamp": 1697658000,
+  "device": "VacuumController",
+  "command": "SET_PRESSURE",
+  "value": -70.0,
+  "units": "kPa",
+  "status": "OK"
+}
+\end{verbatim}
+These packets are transmitted over serial or TCP and parsed into Python dictionaries for processing and logging.
+
+\subsubsection{Subsystem Data Processing}
+PolyScript uses an event-driven state machine to manage system behavior. Each state corresponds to a specific operating mode (e.g., “Idle,” “Grip Active,” “Release,” “Error Recovery”). Transitions are triggered by incoming data packets, timers, or operator commands.
+
+Filtering algorithms are applied to incoming sensor data to smooth fluctuations before determining state changes. PolyScript also includes fault detection routines that compare live data against expected performance thresholds; if anomalies are detected, the subsystem automatically executes recovery procedures and logs the event.

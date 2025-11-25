@@ -1,0 +1,76 @@
+The UR20 arm forms the core of the vacuum gripping system. It is a collaborative robotic (cobot) arm produced by Universal Robots, capable of precise six-axis motion for manipulating objects in a 3D workspace. The arm can be controlled using the 3PE Teach Pendant via a touchscreen interface or programmatically through URScript and the URX Python library. This layer encompasses the physical arm, its control mechanisms, and the end-effector (vacuum gripper) responsible for handling objects.
+
+\subsection{Layer Hardware}
+The UR20 hardware layer includes:
+\begin{itemize}
+  \item \texttt{UR20 robotic arm} - A six-joint collaborative robot with integrated torque sensors and safety limits that enable human-robot interaction.
+  \item \texttt{Control box} - A touchscreen interface used to manually teach motion paths, set parameters, and run programs.
+  \item \texttt{3PE Teach Pendant} - A touchscreen interface used to manually teach motion paths, set parameters, and run programs.
+\end{itemize}
+These components form the complete hardware stack that enables both manual and automated control of the robot arm.
+
+\subsection{Layer Operating System}
+The UR20 operates on PolyScope OS, a Linux-based control environment developed by Universal Robots.
+PolyScope runs both the GUI interface and the URControl process, which interprets URScript commands, manages motion planning, and handles safety monitoring. For external communication or integration, a host PC (running Windows or Linux) may be used to send commands over Ethernet using the URX or RTDE interfaces.
+
+\subsection{Layer Software Dependencies}
+Key software dependencies for the UR20 layer include:
+\begin{itemize}
+  \item \texttt{PolyScope software} (embedded on the UR controller)
+  \item \texttt{URScript} - Native scripting language used to control motion and I/O.
+  \item \texttt{URX Python library} - A high-level API for sending URScript commands over TCP/IP.
+  \item \texttt{RTDE (Real-Time Data Exchange)} interface - For streaming sensor and telemetry data between the robot and external systems.
+  \item \texttt{Modbus/TCP or Ethernet/IP drivers} - For industrial communication or integration with external PLCs.
+\end{itemize}
+These software layers allow for both standalone operation and integration with external control systems or automation frameworks.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%  Be sure to update the subsystem names
+\subsection{Subsystem 1: Motion Control Subsystem}
+The Motion Control Subsystem is responsible for interpreting user input (via the Teach Pendant or URScript) and executing the corresponding joint or Cartesian movements on the physical arm. This subsystem ensures safe, accurate, and synchronized motion of all joints, and includes collision detection, safety monitoring, and motion trajectory planning.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%  Be sure to update the image caption
+\begin{figure}[h!]
+	\centering
+ 	\includegraphics[width=0.30\textwidth]{images/robot_arm.png} % Image
+ \caption{UR20 Robot Arm} % Caption
+\end{figure}
+
+\subsubsection{Subsystem Hardware}
+\begin{itemize}
+  \item \texttt UR20 arm actuators (six servo motors, one per joint)
+  \item \texttt Joint encoders for position feedback
+  \item \texttt Torque and force sensors integrated into each joint
+  \item \texttt Safety circuits and emergency stop relays located in the control box
+\end{itemize}
+
+\subsubsection{Subsystem Operating System}
+The Motion Control Subsystem runs within the URControl process on the robot's embedded Linux system. This process handles real-time motion control loops, typically at 500-1250 Hz, ensuring smooth trajectory execution and immediate safety responses.
+
+\subsubsection{Subsystem Software Dependencies}
+\begin{itemize}
+  \item \texttt{URControl motion kernel} - Proprietary software running on the controller for path planning and joint interpolation.
+  \item \texttt{URScript motion commands} (e.g., movej, movel, servoj) - Used to define and execute motion paths.
+  \item \texttt{URX Python library} - Provides motion control functions and simplifies URScript command generation.
+\end{itemize}
+
+\subsubsection{Subsystem Programming Languages}
+\begin{itemize}
+  \item \texttt{URScript} - Primary scripting language executed by the robot controller.
+  \item \texttt{Python} - Used externally via URX for automation or system integration.
+  \item \texttt{C++ (embedded)} - Utilized internally by Universal Robots within the control firmware.
+\end{itemize}
+
+\subsubsection{Subsystem Data Structures}
+Motion data is exchanged between the controller and host PC using structured packets:
+\begin{itemize}
+  \item \texttt{Joint State Packet} - { q\_actual[], qd\_actual[], i\_actual[], tcp\_pose[], tcp\_force[] }
+  \item \texttt{Command Packet} - { target\_pose[], speed, acceleration, blending\_radius }
+\end{itemize}
+These data structures define the robot's current state and motion targets in a consistent format for both URScript and RTDE communication.
+
+\subsubsection{Subsystem Data Processing}
+The motion subsystem processes trajectory data using cubic interpolation and inverse kinematics algorithms to convert Cartesian motion commands into joint-space trajectories. Real-time feedback from encoders and torque sensors is filtered using PID control loops to maintain smooth motion and compensate for load variations. Collision detection algorithms continuously monitor torque deviations to halt motion if an unexpected obstruction is encountered.
+
+

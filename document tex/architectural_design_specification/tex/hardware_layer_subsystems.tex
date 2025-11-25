@@ -1,0 +1,77 @@
+\subsection{UR20 Robotic Arm}
+The UR20 Robot Arm is responsible for performing repetitive tasks across a wide range or industrial applications.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%   Change the graphic here. Put your image in the 'images' folder
+%   and update the name from 'images/test_image' to your image name
+\begin{figure}[h!]
+	\centering
+ 	\includegraphics[width=0.60\textwidth]{images/hardware_layer.png}
+ \caption{Hardware Layer diagram} % Be sure to change the caption.
+\end{figure}
+
+\subsubsection{Assumptions}
+The design and operation of the UR20 Robot Arm subsystem are based on the use of ROS for the motion planning and suction control.
+\begin{itemize}
+    \item The UR20 robot arm will interact with ROS nodes for motion planning and suction control.
+    \item The motion planning and suction control nodes will provide joint position data and suction parameters, respectively.
+\end{itemize}
+
+\subsubsection{Responsibilities}
+The UR20 Robot Arm subsystem has the following key responsibilities within the system:
+
+\begin{itemize}
+    \item \textbf{Motion:} Executes movement commands from the motion planning ROS node, including joint positions and paths needed to complete tasks.
+    
+    \item \textbf{Suction Operation:} Controls the suction gripper by receiving commands from the suction control ROS node to pick up or release objects.
+
+    \item \textbf{Sensor Feedback:} Reports joint positions, force, and other sensor data to ROS nodes for monitoring and adjusting actions in real time.
+
+    \item \textbf{Safety and Collision Detection:} Monitors for collisions and follows safety protocols, including stopping motion when unsafe conditions are detected.
+\end{itemize}
+
+
+\subsubsection{Subsystem Interfaces}
+Each of the inputs and outputs for the subsystem are defined here. Create a table with an entry for each labelled interface that connects to this subsystem. For each entry, describe any incoming and outgoing data elements will pass through this interface.
+
+\subsubsection{Subsystem Interfaces}
+Each of the inputs and outputs for the UR20 Robot Arm subsystem are defined in the table below. These interfaces handle communication with motion planning, suction control, and monitoring systems.
+
+\begin{table}[H]
+\caption{UR20 Robotic Arm}
+\begin{center}
+    \begin{tabular}{ | p{1cm} | p{6cm} | p{3cm} | p{3cm} |}
+    \hline
+    ID & Description & Inputs & Outputs \\ \hline
+    \#01 & Interface to Motion Planning ROS Node & \pbox{3cm}{Input 6} & \pbox{3cm}{N/A} \\ \hline
+
+    \#02 & Interface to Suction Control ROS Node & \pbox{3cm}{Input 6} & \pbox{3cm}{N/A} \\ \hline
+
+    \#03 & Sensor Feedback Interface & \pbox{3cm}{N/A} & \pbox{3cm}{Output 6} \\ \hline
+
+    \#04 & Safety Monitoring Interface & \pbox{3cm}{N/A} & \pbox{3cm}{Output 6} \\ \hline
+    \end{tabular}
+\end{center}
+\end{table}
+
+\subsection{Vacuum Suction Assembly}
+
+\subsubsection{Assumptions}
+The Vacuum Suction Assembly uses a simple, commercially available vacuum pump capable of lifting at least 50 lbs, suitable for typical pick-and-place operations. It is controlled through a dedicated ROS node that sends commands to activate or deactivate the pump based on task requirements. The system assumes that the suction cup and pump together provide reliable gripping performance for the expected payloads. 
+
+\subsubsection{Responsibilities}
+The Vacuum Suction Assembly is responsible for securely gripping and releasing objects during robotic operations. Its main functions include activating and deactivating the vacuum pump based on ROS control node commands and maintaining sufficient suction force to lift objects weighing up to 50 pounds. 
+
+\subsubsection{Subsystem Interfaces}
+The following table summarizes the inputs and outputs for the Vacuum Suction Assembly subsystem.
+
+\begin {table}[H]
+\caption {Vacuum Suction Assembly} 
+\begin{center}
+    \begin{tabular}{ | p{1cm} | p{6cm} | p{3cm} | p{3cm} |}
+    \hline
+    ID & Description & Inputs & Outputs \\ \hline
+    \#01 & Interface to Suction Control ROS Node & \pbox{3cm}{Input 7} & \pbox{3cm}{Output 7}  \\ \hline
+    \end{tabular}
+\end{center}
+\end{table}
