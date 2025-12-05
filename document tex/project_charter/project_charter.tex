@@ -4,10 +4,9 @@
 %%% Feel free to distribute this template, but please keep to referal to http://www.howtotex.com/ here.
 %%% February 2011
 %%%
-%%% Modified January 2016 by CDM
-%%% Last updated 2025 by CTC
+%%% Last updated February 2025 by CTC
 
-%%%  Preamble
+%%%  Preamble - Do not change anything here.
 \documentclass[11pt,letterpaper]{article}
 \usepackage[margin=1.0in]{geometry}
 \usepackage[T1]{fontenc}
@@ -23,23 +22,23 @@
 \usepackage{sectsty}
 \usepackage[compact]{titlesec} 
 \usepackage[tablegrid]{vhistory}
-\usepackage{pbox}
+\usepackage{comment}
 \allsectionsfont{\color{accentcolor}\scshape\selectfont}
 
 %%% Definitions
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-% Update this section to your team and semester info.
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Change me to fit your team/semester information
 \definecolor{accentcolor}{rgb}{0.0,0.0,0.5} 
 \newcommand{\teamname}{The Suctioneers}
 \newcommand{\productname}{The Vacu-Arm}
-\newcommand{\coursename}{CSE 4317: Senior Design II}
-\newcommand{\semester}{Fall 2025}
-\newcommand{\docname}{Detailed Design Specification}
+\newcommand{\coursename}{CSE 4316: Senior Design I}
+\newcommand{\semester}{Summer 2025}
+\newcommand{\docname}{Project Charter}
 \newcommand{\department}{Department of Computer Science \& Engineering}
 \newcommand{\university}{The University of Texas at Arlington}
-\newcommand{\authors}{Andrew Weiler \\ Andrew Whitmill \\ Samriddha Kharel \\ Seezayn Bishwokarma \\ Jonathan Camarce}
+\newcommand{\authors}{Andrew Weiler\\ Andrew Whitmill \\ Jonathan Camarce \\ Samriddha Kharel \\ Seezayn Bishwokarma }
 
-%%% Headers and footers
+%%% Headers and footers - do not change anything here
 \usepackage{fancyhdr}
 	\pagestyle{fancy}						% Enabling the custom headers/footers
 \usepackage{lastpage}	
@@ -54,7 +53,7 @@
 	\renewcommand{\headrulewidth}{0.0pt}
 	\renewcommand{\footrulewidth}{0.4pt}
 
-%%% Change the abstract environment
+%%% Abstract environment
 \usepackage[runin]{abstract}			% runin option for a run-in title
 %\setlength\absleftindent{30pt}			% left margin
 %\setlength\absrightindent{30pt}		% right margin
@@ -68,17 +67,20 @@
 
 %%% Cover sheet
 {\centering \huge \color{accentcolor} \sc \textbf{\department \\ \university} \par}
-\vspace{1 in} % Department and University
-{\centering \huge \color{accentcolor} \sc \textbf{\docname \\ \coursename \\ \semester} \par} % Document, class, semester info
-\vspace{0.45 in} % spacing before cover sheet image
+\vspace{0.8 in} % Adjusts space between dept/school info and document/semester info
+{\centering \huge \color{accentcolor} \sc \textbf{\docname \\ \coursename \\ \semester} \par}
+\vspace{0.5 in} % Adjusts space after document/semester info and before image.
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%   Change the graphic here. Put your image in the 'images' folder
-%   update the name from 'images/test_image' to your image name.
+%   Change the graphic here. Put your image in the images folder
+%   and update the name from 'images/test_image' to your image name
+
+% Begin image insertion ----------------
 \begin{figure}[h!]
 	\centering
-   	\includegraphics[width=0.60\textwidth]{images/logosucc.png} % Change to correct image file
+   	\includegraphics[width=0.60\textwidth]{images/logosucc.png} % Change image name
 \end{figure}
-\vspace{0.35 in} % spacing after image and before team/product info
+% End image insertion ------------------
+\vspace{0.35 in} % spacing after cover sheet image, before team/product info
 {\centering \huge \color{accentcolor} \sc \textbf{\teamname \\ \productname} \par}
 \vspace{0.35 in} % spacing before team members
 {\centering \large \sc \textbf{\authors} \par}
@@ -91,53 +93,61 @@
 
 %%% Revision History
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%   Each '\vhEntry' begins a row; each {} is a column. Update
-%   this to reflect your revision history.
+% Each '\vhEntry' begins a new version entry, and each {} is a 
+% column. Update this to reflect your version history.
 \begin{versionhistory}
-  	\vhEntry{0.1}{9.19.2025}{CC}{document creation}
-  	\vhEntry{0.2}{10.10.2025}{AW|AW|SK|JC}{first draft}
-  	\vhEntry{1.0}{12.04.2025}{AW}{final draft}
+  	\vhEntry{0.1}{07.11.2025}{AW|AW|JC|SK}{document creation}
+  	\vhEntry{0.2}{07.11.2025}{AW|AW|JC|SK}{complete draft}
+  	\vhEntry{2.0}{11.25.2025}{AW}{final draft}
 \end{versionhistory}
 \newpage
 
 %%% Table of contents
-\setcounter{tocdepth}{2}
 \tableofcontents
 \newpage
 
 %%% List of figures and tables (optional)
 \listoffigures
-\listoftables
+%\listoftables
+\newpage
+\setcounter{table}{0}
+
+%%% Executive summary sections (Lean Charter)
+% The \section command creates a section, assigns it a number   
+% and gives it the title in the braces. The \input command   
+% inserts the contents of the text file indicated in the braces.
+\section{Problem Statement}
+\input{tex/problem}
+\section{Methodology}
+\input{tex/methodology}
+\section{Value Proposition}
+\input{tex/value_proposition}
+\section{Development Milestones}
+\input{tex/milestones}
 \newpage
 
-%%% Document sections
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%   This imports latex files from the tex folder. Copy/paste to
-%   add sections as needed and create file for it in the tex folder.
-%   Be sure to change the section names below from Layer X, etc.
-\section{Introduction}
-\input{tex/introduction.tex}
+%%% Remaining project charter sections (Full Charter)
+\section{Background}
+\input{tex/background}
+\section{Related Work}
+\input{tex/related_work}
 \section{System Overview}
-\input{tex/system_overview.tex}
+\input{tex/system_overview}
+\section{Roles \& Responsibilities}
+\input{tex/roles_responsibilities}
+\section{Cost Proposal}
+\input{tex/cost_proposal}
+\section{Facilities \& Equipment}
+\input{tex/facilities_equipment}
+\section{Assumptions}
+\input{tex/assumptions}
+\section{Constraints}
+\input{tex/constraints}
+\section{Risks}
+\input{tex/risks}
+\section{Documentation \& Reporting}
+\input{tex/documentation_reporting}
 \newpage
-\section{UR 20 Robot Arm Layer Subsystems}
-\input{tex/arm_subsystems.tex}
-\newpage
-\section{Safety Sensor Layer Subsystems}
-\input{tex/safety_sensor_subsystems.tex}
-\newpage
-\newpage
-\newpage
-\section{Conveyor Belt Layer Subsystems}
-\input{tex/conveyor_subsystems.tex}
-\newpage
-\section{PLC Layer Subsystems}
-\input{tex/plc_subsystems.tex}
-\newpage
-\section{Appendix A}
-\input{tex/appendix.tex}
-\newpage
-
 
 %%% References
 \bibliographystyle{reference/IEEEtran_custom}
